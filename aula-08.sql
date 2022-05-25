@@ -25,4 +25,15 @@ BEGIN
 
     FETCH v1 INTO departamentos;
     dbms_output.put_line(departamentos.department_name);
+    OPEN v1 FOR SELECT
+                    *
+                FROM
+                    departments;
+
+    FETCH v1 INTO departamentos;
+    WHILE v1%found LOOP
+        dbms_output.put_line(departamentos.department_name);
+        FETCH v1 INTO departamentos;
+    END LOOP;
+
 END;
