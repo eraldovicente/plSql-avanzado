@@ -1,21 +1,32 @@
 SET SERVEROUTPUT ON;
+
 DECLARE
-    TYPE EMPLEADO IS VARRAY(10) OF EMPLOYEES%ROWTYPE;
-    EMPLEADOS EMPLEADO := EMPLEADO();
+    TYPE empleado IS
+        VARRAY(10) OF employees%rowtype;
+    empleados empleado := empleado();
 BEGIN
-    SELECT * BULK COLLECT INTO EMPLEADOS
-    FROM EMPLOYEES FETCH FIRST 10 ROWS ONLY;
-    FOR I IN EMPLEADOS.FIRST()..EMPLEADOS.LAST() LOOP
-        DBMS_OUTPUT.PUT_LINE(EMPLEADOS(I).FIRST_NAME || ' ' || EMPLEADOS(I).SALARY);
+    SELECT
+        *
+    BULK COLLECT
+    INTO empleados
+    FROM
+        employees
+    FETCH FIRST 10 ROWS ONLY;
+
+    FOR i IN empleados.first()..empleados.last() LOOP
+        dbms_output.put_line(empleados(i).first_name
+                             || ' '
+                             || empleados(i).salary);
     END LOOP;
-    DBMS_OUTPUT.PUT_LINE(EMPLEADOS.LAST());
-    DBMS_OUTPUT.PUT_LINE(EMPLEADOS.FIRST());
-    DBMS_OUTPUT.PUT_LINE(EMPLEADOS.NEXT(10));
-    IF EMPLEADOS.EXISTS(11) THEN
-        DBMS_OUTPUT.PUT_LINE('EXISTE');
+
+    dbms_output.put_line(empleados.last());
+    dbms_output.put_line(empleados.first());
+    dbms_output.put_line(empleados.next(10));
+    IF empleados.EXISTS(11) THEN
+        dbms_output.put_line('EXISTE');
     ELSE
-        DBMS_OUTPUT.PUT_LINE('NO EXISTE');
-    END IF; 
+        dbms_output.put_line('NO EXISTE');
+    END IF;  
     -- EMPLEADOS.DELETE(2); -- NÃO PODE USAR TEM QUE TER POSIÇÕES CONTÍNUAS 
 END;
 /
