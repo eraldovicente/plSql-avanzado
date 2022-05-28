@@ -1,0 +1,1 @@
+DESC DBMS_LOB;
