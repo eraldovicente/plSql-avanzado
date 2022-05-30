@@ -28,8 +28,17 @@ INSERT INTO clientes VALUES (
 );
 
 INSERT INTO clientes VALUES (
+    4,
+    'RAUL',
+    NULL,
+    NULL
+);
+
+INSERT INTO clientes VALUES (
     5,
     'MARIA',
     NULL,
     NULL
 );
+
+SELECT * FROM CLIENTES;
