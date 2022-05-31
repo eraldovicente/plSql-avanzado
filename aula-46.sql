@@ -9,18 +9,21 @@ CREATE OR REPLACE PROCEDURE crear_tabla (
 )
     AUTHID current_user --DEFINER
 IS
+    comando VARCHAR2(100);
 BEGIN
-    EXECUTE IMMEDIATE 'CREATE TABLE '
-                      || nombre_tabla
-                      || '('
-                      || columnas
-                      || ')';
+    comando := 'CREATE TABLE '
+               || nombre_tabla
+               || '('
+               || columnas
+               || ')';
+    dbms_output.put_line(comando);
+    EXECUTE IMMEDIATE comando;
 END;
 /
 
 BEGIN
     crear_tabla(
-               'PR2',
+               'PR3',
                'CODIGO NUMBER, DATOS VARCHAR2(100)'
     );
 END;
